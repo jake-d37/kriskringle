@@ -23,7 +23,6 @@ function ValidTextCheck(string){
 //creates a card for a new player and creates a new Player object
 function AddPlayer() {
     let name = document.querySelector("#new-player").value;
-    console.log("adding player...\nInput says "+ name);
     
     if (!ValidTextCheck(name)){
         alert("Please enter a valid input");
@@ -55,7 +54,7 @@ function DrawNewPlayer(index){
     let parent = document.createElement("div");
     parent.className = "box";
     parent.addEventListener('dblclick', function() {
-        ToggleFlip(parent);
+        card.querySelector('.card-inner').classList.toggle('flipped');
     });
     //card deets, for flipping
     let cardInner = document.createElement("div");
@@ -116,12 +115,6 @@ function DrawNewPlayer(index){
 function CreateBreak() {
     return document.createElement("br");
 }
-
-function ToggleFlip(card) {
-    console.log("Card was flipped");
-    card.querySelector('.card-inner').classList.toggle('flipped');
-}
-
 
 //update text outlining state of sorting on the card
 function UpdateSortedText(player, card){
@@ -206,7 +199,6 @@ function DrawConstraintsForm(player){
 
 //update the array of constraints 
 function ConstraintChanged(event, player, constraint){
-    console.log("Updating constraints of " + player.name);
     if (event.target.checked){
         AddConstraint(player, constraint);
     } else {
@@ -240,7 +232,6 @@ function UpdateDrawPlayer() {
         }
 
         //update content
-        console.log("Updating " + player.name + "'s node");
         UpdatePlayerDetails(player,element);
     });
 
@@ -280,7 +271,6 @@ function AddConstraint(player, constraint){
     }
     //if passed, add constraint to player
     player.constraints.push(constraint);
-    console.log(player.name + " has a new constraint: " + constraint.name);
 }
 
 //remove constraint from a Player object
@@ -292,7 +282,6 @@ function RemoveConstraint(player, constraint) {
         return;
     }
     //remove the object from the constraint array
-    console.log("Removing " + constraint.name + " from " + player.name + "'s constraints");
     player.constraints.splice(index, 1);
 }
 
@@ -303,14 +292,12 @@ function RemovePlayer(player){
         alert("This player could not be found");
         return;
     } 
-    console.log("Removing " + player.name + " altogether");
     players.splice(index, 1);
     UpdateDrawPlayer();
 }
 
 //sort which player is assigned to which recipient
 function Sort() {
-    console.log("Beginning to sort");
     //ensure nothing counts as collapsed
     chosen = [];
     
@@ -319,19 +306,14 @@ function Sort() {
         Collapse(players[i]);
     }
     //show us its done
-    console.log("Sort complete");
     let warnUser = false;
     for (let i = 0; i < players.length; i++){
-        if (players[i].receiver != null){
-            console.log(players[i].name + " = " + players[i].receiver.name);
-        } else {
-            console.log(players[i].name + " has no receiver");
+        if (players[i].receiver == null){
             warnUser = true;
         }
     }
 
     if (warnUser){
-        console.log("warning user now");
         document.querySelector(".warning").style.display = "block";
     } else {
         document.querySelector(".warning").style.display = "none";
@@ -341,58 +323,27 @@ function Sort() {
 }
 
 //choose a recipient for a given player object
-function Collapse(player) {
-    console.log(" ");
-    console.log("Collapsing " + player.name);
-    
+function Collapse(player) {    
     player.receiver = ChooseReceiver(player);
     player.sorted = true;
 
     if (player.receiver != null){
         //this is now collapsed
-        console.log(player.name + "'s receiver has been set to " + player.receiver.name);
         chosen.push(player.receiver);
-    } else {
-        console.log("We failed to set " + player.name + "'s receiver");
-    }
-
-    //print current collapsed
-    console.log(" ");
-    console.log("Current collapsed are (" + chosen.length + "):");
-    for (let i = 0; i < chosen.length; i++){
-        console.log(chosen[i].name);
-    }
-    console.log(" ");
+    } 
 }
 
 //find entropy and choose a player object at random from entropy
 function ChooseReceiver(player) {
     //get all players
     let entropy = [];
-    console.log(" ");
-    console.log("All possibilities include (" + players.length + "):");
+
     for (let i = 0; i < players.length; i++){
         entropy.push(players[i]);
-        console.log(players[i].name);
     }
+
     let currentPlayer;
     let currentIndex;
-
-    //print current constraints
-    console.log(" ");
-    console.log(player.name + "'s constraints are (" + player.constraints.length + "):");
-    for (let i = 0; i < player.constraints.length; i++){
-        console.log(player.constraints[i].name);
-    }
-
-    //print current collapsed
-    console.log(" ");
-    console.log("Current collapsed are (" + chosen.length + "):");
-    for (let i = 0; i < chosen.length; i++){
-        console.log(chosen[i].name);
-    }
-    console.log(" ");
-
     let removed;
     for (let i = 0; i < players.length; i++){
         currentPlayer = players[i].name;
@@ -401,7 +352,6 @@ function ChooseReceiver(player) {
         for (let j = 0; j < player.constraints.length; j++){
             if (currentPlayer === player.constraints[j].name){
                 //remove from entropy
-                console.log("removing "+ currentPlayer + " from " + player.name + "'s entropy");
                 currentIndex = FindName(entropy, currentPlayer);
                 entropy.splice(currentIndex,1); //make it remove the right index
                 removed = true;
@@ -412,7 +362,6 @@ function ChooseReceiver(player) {
             for (let k = 0; k < chosen.length; k++){
                 if (currentPlayer === chosen[k].name){
                     //remove from entropy
-                    console.log("removing "+ currentPlayer + " from " + player.name + "'s entropy");
                     currentIndex = FindName(entropy, currentPlayer);
                     entropy.splice(currentIndex,1); //make it remove the right index
                 }
@@ -421,16 +370,8 @@ function ChooseReceiver(player) {
     }
     //check if this list is empty
     if (entropy.length <= 0){
-        console.log("No possible receiver for " + player.name);
         return null;
     }
-
-    //show the options in the console for debugging
-    console.log(player.name + "'s entropy consists of (" + entropy.length + "):")
-    for (let i=0;i<entropy.length;i++){
-        console.log(entropy[i].name);
-    }
-    console.log(" ");
 
     //choose something from the list
     let rand = Math.floor(Math.random() * entropy.length);
