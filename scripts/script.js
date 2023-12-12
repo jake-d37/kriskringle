@@ -22,7 +22,10 @@ function ValidTextCheck(string){
 
 //creates a card for a new player and creates a new Player object
 function AddPlayer() {
+    //get the name inputted
     let name = document.querySelector("#new-player").value;
+    //remove the text for feedback
+    document.querySelector("#new-player").value = "";
     
     if (!ValidTextCheck(name)){
         alert("Please enter a valid input");
@@ -108,8 +111,24 @@ function DrawNewPlayer(index){
     //fill content
     UpdatePlayerDetails(player, parent);
 
-    // append the parent to the body of the document
-    document.querySelector(".content").appendChild(parent);
+    //push new card to the front
+    let content = document.querySelector(".content");
+
+    if (content.children.length > 0) {
+        let firstCard = content.children[0];
+        content.insertBefore(parent, firstCard);
+    } else {
+        content.appendChild(parent); // If there are no children, append the new card
+    }
+}
+
+function NewToFront(newCard){
+    console.log("Moving newest card to front");
+
+    let parent = document.querySelector(".content")
+    let firstCard = parent.children[0];
+
+    parent.insertBefore(newCard, firstCard);
 }
 
 function CreateBreak() {
