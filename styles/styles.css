@@ -1,0 +1,253 @@
+/* Define color variables */
+:root {
+    /* Primary colors */
+    --primary-color: #E95F5F;
+    --secondary-color: #5EAA51;
+    --third-color: #eb9900;
+
+    /* Text colors */
+    --text-color: #F5F5F5;
+    --second-text-color: #111111;
+    --link-color: #0066cc;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    padding: 0px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*animations*/
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* Start from invisible */
+        transform: scale(0) translateY(40px);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(1.2) translateY(-5px);
+    }
+    100% {
+        opacity: 1; /* Fade to fully visible */
+        transform: scale(1) translateY(0);
+    }
+}
+
+@keyframes hoverIn {
+    0% {
+        transform: scale(1) rotate(0deg);
+    }
+    100% {
+        transform: scale(1.2) rotate(-10deg);
+    }
+}
+
+/* header properties */
+.header{
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 14px; 
+    border-bottom-right-radius: 14px; 
+    padding: 10px 0px 40px 0px;
+    margin: 0px 0px 40px 0px;
+    box-shadow: 0px 10px 30px 5px rgba(0,0,0,0.25),
+                0px 0px 50px 45px rgba(255, 255, 255, 0.1) inset;
+    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: space-evenly;
+}
+button{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: "Outfit", sans-serif;
+    font-weight: 900;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid var(--text-color);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+button:hover {
+    animation: hoverIn 0.25s forwards;
+}
+#add-player{
+    display: flex;
+    justify-content:flex-start;
+    margin-top: 10px;
+}
+#add-button {
+    width: 10%;
+    font-size: 24px;
+}
+input[type="text"]{
+    /*text*/
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    /*border and shadow*/
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid var(--second-text-color);
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    /*colour and size*/
+    background-color: var(--text-color);
+    width: 70%;
+    /*margins*/
+    padding: 1px 5px 1px 5px;
+    margin-right: 5px;
+}
+.header-sect{
+    width: calc(50% - 40px);
+}
+#left{
+    display: inline-block;
+    justify-content: center;
+}
+/* right side options in header*/
+#sort {
+    width: 70%;
+    padding: 20px;
+    font-weight: 900;
+    font-size: 32px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#extras{
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+}
+#excel{
+    width: 47.5%;
+    font-weight: 100;
+    background-color: var(--third-color);
+}
+#git {
+    width:47.5%;
+    padding: 6px;
+    background-color: var(--third-color);
+    font-weight: 100;
+    margin-right: 5%;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    text-align: center; /* Center text within button */
+}
+#git-logo {
+    height: 20px;
+    margin-left: 10px;
+}
+
+/* node properties */
+.box {
+    width: calc(50% - 40px);
+}
+.content {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-evenly;
+}
+input[type="checkbox"]{
+    margin-right: 5px;
+}
+.player-remove{
+    /*positioning*/
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    /*colour and size*/
+    background-color: var(--primary-color);
+    width: 25px;
+    height: 25px;
+    border-radius: 14px;
+}
+
+.card-inner {
+    position: relative;
+    transform-style: preserve-3d; /* Needed for 3D transformations */
+    transition: transform 0.6s ease; /* Transition for smooth animation */
+
+    background-color: var(--text-color);
+    border: 4px solid var(--primary-color);
+    border-radius: 14px;
+    box-shadow: 0px 5px 14px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    padding-top: 5px;
+    margin: 0px 10px 40px 10px;
+    color: var(--second-text-color);
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease-in-out;
+}
+  
+.card-front,
+.card-back {
+    backface-visibility: hidden; /* Hide the backface of the cards */
+}
+  
+.card-back {
+    transform: rotateY(180deg); /* Initially flipped */
+}
+
+.card-inner.flipped {
+    transform: rotateY(180deg); /* Rotate the card when 'flipped' class is applied */
+}
+
+/*text properties*/
+
+h1,h2,h3,h4,h5 {
+    font-family: "Outfit", sans-serif;
+}
+
+h1 {
+    font-weight: 900;
+    font-size: 48px;
+}
+
+h3 {
+    font-weight: 600;
+}
+
+label {
+    font-family: "Outfit", sans-serif;
+    font-weight: normal;
+}
+
+/* media query sizing */
+@media screen and (max-width: 768px) {
+    /*header */
+    #sort {
+        width: 85%;
+        font-size: 24px;
+    }
+    #extras{
+        width: 85%;
+    }
+    #git-logo {
+        height: 10px;
+    }
+    #add-button {
+        width: 20%;
+        font-size: 24px;
+    }
+
+    /* text */
+    h1 {
+        font-size: 24px;
+    }
+    h2 {
+        font-size: 14px;
+    }
+    h3 {
+        font-size: 10px;
+    }
+    button {
+        font-size: 10px;
+    }
+}

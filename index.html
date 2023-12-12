@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kris Kringle</title>
+    <!--for exporting excel spreadsheets-->
+    <script src="https://git.sheetjs.com/sheetjs/sheetjs.git"></script>
+    <!--for interactivity-->
+    <script src="scripts/script.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+</head>
+<body>
+    <div class = "header">
+        <div class = "header-sect">
+            <br>
+            <h1>Kris Kringle</h1> <br>
+            <h3>Add Player</h3>
+            <div id = "add-player">
+                <input type="text" id="new-player" name="lname">
+                <button onclick="AddPlayer()" id="add-button">+</button>
+            </div>
+        </div>
+        <div class = "header-sect" id = "left">
+            <br>
+            <button id = "sort" onclick="Sort()">SORT!</button>
+            <div id = "extras">
+                <button id = "git" onclick="window.open('https://github.com/jake-d37/kriskringle', '_blank')">Find code on GitHub <img src = "assets/github-mark-white.svg" id = "git-logo"></button>
+                <button id = "excel" onclick="exportToExcel()">Generate spreadsheet</button>
+            </div>
+        </div>
+    </div>
+    <div class = "content">
+
+    </div>
+</body>
+</html>
