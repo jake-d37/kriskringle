@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kris Kringle</title>
     <!--for exporting excel spreadsheets-->
-    <script src="https://git.sheetjs.com/sheetjs/sheetjs.git"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
     <!--for interactivity-->
     <script src="scripts/script.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
@@ -30,6 +30,9 @@
                 <button id = "excel" onclick="exportToExcel()">Generate spreadsheet</button>
             </div>
         </div>
+    </div>
+    <div class = "warning">
+        <h2>WARNING:</h2> <h3>At least one player has not been assigned a recipient</h3>
     </div>
     <div class = "content">
 

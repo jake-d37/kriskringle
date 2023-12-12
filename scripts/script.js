@@ -11,6 +11,7 @@ function Player(name, constraints, index){
     this.receiver; //Player object
 }
 
+//ensure text isn't empty
 function ValidTextCheck(string){
     if (string.trim() == ""){
         return false;
@@ -19,6 +20,7 @@ function ValidTextCheck(string){
     return true;
 }
 
+//creates a card for a new player and creates a new Player object
 function AddPlayer() {
     let name = document.querySelector("#new-player").value;
     console.log("adding player...\nInput says "+ name);
@@ -45,6 +47,7 @@ function AddPlayer() {
     UpdateDrawPlayer();
 }
 
+//draws new card
 function DrawNewPlayer(index){
     let player = players[index];
 
@@ -119,6 +122,8 @@ function ToggleFlip(card) {
     card.querySelector('.card-inner').classList.toggle('flipped');
 }
 
+
+//update text outlining state of sorting on the card
 function UpdateSortedText(player, card){
     let helpText = card.querySelector(".player-help");
     let receiver = card.querySelector(".player-receiver");
@@ -143,6 +148,7 @@ function UpdateSortedText(player, card){
     }
 }
 
+//draw the constraints section of a card
 function DrawConstraintsForm(player){
     let container = document.createElement("div");
     let title = document.createElement("h5");
@@ -208,6 +214,7 @@ function ConstraintChanged(event, player, constraint){
     }
 }
 
+//update the card to match changed data
 function UpdateDrawPlayer() {
     let nodeList = document.querySelectorAll(".box");
 
@@ -243,6 +250,7 @@ function UpdateDrawPlayer() {
     });
 }
 
+//update player section of card when data changes
 function UpdatePlayerDetails(player, uiParent){
     let name = uiParent.querySelector(".player-name");
     let receiver = uiParent.querySelector(".player-receiver");
@@ -258,16 +266,10 @@ function UpdatePlayerDetails(player, uiParent){
     //fill out content
     name.textContent = player.name;
     
-    /*
-    if (player.receiver == null){
-        receiver.textContent = "Receiver not chosen";
-    } else {
-        receiver.textContent = "Giving present to " + player.receiver.name;
-    }*/
-
     UpdateSortedText(player, uiParent)
 }
 
+//add new constraint to a Player object
 function AddConstraint(player, constraint){
     //find if that constraint already exists
     for (let i = 0; i < player.constraints.length; i++){
@@ -281,6 +283,7 @@ function AddConstraint(player, constraint){
     console.log(player.name + " has a new constraint: " + constraint.name);
 }
 
+//remove constraint from a Player object
 function RemoveConstraint(player, constraint) {
     //find where the constraint is
     let index = FindName(player.constraints, constraint.name);
@@ -293,6 +296,7 @@ function RemoveConstraint(player, constraint) {
     player.constraints.splice(index, 1);
 }
 
+//remove a player from the game entirely
 function RemovePlayer(player){
     let index = FindName(players, player.name);
     if (index <= -1){
@@ -304,6 +308,7 @@ function RemovePlayer(player){
     UpdateDrawPlayer();
 }
 
+//sort which player is assigned to which recipient
 function Sort() {
     console.log("Beginning to sort");
     //ensure nothing counts as collapsed
@@ -315,17 +320,27 @@ function Sort() {
     }
     //show us its done
     console.log("Sort complete");
+    let warnUser = false;
     for (let i = 0; i < players.length; i++){
         if (players[i].receiver != null){
             console.log(players[i].name + " = " + players[i].receiver.name);
         } else {
             console.log(players[i].name + " has no receiver");
+            warnUser = true;
         }
+    }
+
+    if (warnUser){
+        console.log("warning user now");
+        document.querySelector(".warning").style.display = "block";
+    } else {
+        document.querySelector(".warning").style.display = "none";
     }
 
     UpdateDrawPlayer();
 }
 
+//choose a recipient for a given player object
 function Collapse(player) {
     console.log(" ");
     console.log("Collapsing " + player.name);
@@ -350,6 +365,7 @@ function Collapse(player) {
     console.log(" ");
 }
 
+//find entropy and choose a player object at random from entropy
 function ChooseReceiver(player) {
     //get all players
     let entropy = [];
@@ -444,6 +460,7 @@ function exportToExcel() {
     // Sample data
     const data = [
         ['Gifter', 'Recipient'],
+        ['',''],
     ];
 
     try {
@@ -475,14 +492,17 @@ function exportToExcel() {
     
         // Export the workbook as an XLSX file
         let dateString = GetDateString();
-        XLSX.writeFile(wb, 'kris-kringle-${dateString}.xlsx');
+        XLSX.writeFile(wb, "kris-kringle-" + dateString + ".xlsx");
     } catch (error) {
         alert('An error occurred: ' + error.message);
         return;
     }
 }
 
+//return a string for a code of the current time and date
 function GetDateString() {
+    let currentDate = new Date();
+
     let year = currentDate.getFullYear();
     let month = currentDate.getMonth();
     let day = currentDate.getDate();
