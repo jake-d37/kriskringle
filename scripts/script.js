@@ -54,7 +54,7 @@ function DrawNewPlayer(index){
     let parent = document.createElement("div");
     parent.className = "box";
     parent.addEventListener('dblclick', function() {
-        card.querySelector('.card-inner').classList.toggle('flipped');
+        ToggleFlip(parent);
     });
     //card deets, for flipping
     let cardInner = document.createElement("div");
@@ -115,6 +115,11 @@ function DrawNewPlayer(index){
 function CreateBreak() {
     return document.createElement("br");
 }
+
+function ToggleFlip(card) {
+    card.querySelector('.card-inner').classList.toggle('flipped');
+}
+
 
 //update text outlining state of sorting on the card
 function UpdateSortedText(player, card){
