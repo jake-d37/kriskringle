@@ -55,13 +55,13 @@ html{
     border-top-right-radius: 0;
     border-bottom-left-radius: 14px; 
     border-bottom-right-radius: 14px; 
-    padding: 10px 0px 40px 0px;
+    padding: 10px 0px 20px 20px;
     margin: 0px 0px 20px 0px;
     box-shadow: 0px 10px 30px 5px rgba(0,0,0,0.25),
                 0px 0px 50px 45px rgba(255, 255, 255, 0.1) inset;
-    text-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.5);
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 button{
     background-color: var(--secondary-color);
@@ -72,6 +72,11 @@ button{
     border-radius: 5px;
     border-bottom: 2px solid var(--text-color);
     box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+}
+#logo{
+    font-family: 'Titan One', sans-serif;
+    font-weight: 400;
+    font-size: 42px;
 }
 button:hover {
     animation: hoverIn 0.25s forwards;
@@ -123,11 +128,13 @@ input[type="text"]{
     width: 70%;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 0px;
 }
 #excel{
     width: 47.5%;
     font-weight: 100;
     background-color: var(--third-color);
+    margin-bottom: 0px;
 }
 #git {
     width:47.5%;
@@ -135,6 +142,7 @@ input[type="text"]{
     background-color: var(--third-color);
     font-weight: 100;
     margin-right: 5%;
+    margin-bottom: 0px;
     display: flex; /* Use flexbox */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
@@ -143,6 +151,7 @@ input[type="text"]{
 #git-logo {
     height: 20px;
     margin-left: 10px;
+    margin-bottom: 0px;
 }
 
 /*warning properties*/
@@ -254,11 +263,20 @@ label {
     h1 {
         font-size: 24px;
     }
+    #logo{
+        font-size: 24px;
+    }
+    .player-name, .player-giftee-name{
+        font-size: 18px;
+    }
     h2 {
         font-size: 14px;
     }
     h3 {
-        font-size: 10px;
+        font-size: 12px;
+    }
+    h4{
+        font-size: 12px;
     }
     button {
         font-size: 10px;
