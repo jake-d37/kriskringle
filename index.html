@@ -14,25 +14,23 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Outfit">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titan One">
     <!--style-->
-    <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
 </head>
 <body>
     <div class = "header">
-        <div class = "header-sect">
-            <br>
-            <h1 id = "logo">Kris Kringle</h1> <br>
+        <div class = "header-sect header-left">
+            <h1 id = "logo">Kris Kringle</h1>
             <h3>Add Player</h3>
-            <div id = "add-player">
-                <input type="text" id="new-player" name="lname">
-                <button onclick="AddPlayer()" id="add-button">+</button>
+            <div class = "add-player">
+                <input class="player-input" type="text" id="new-player" name="lname">
+                <button onclick="AddPlayer()" id="add-button" class = "add-button">+</button>
             </div>
         </div>
-        <div class = "header-sect" id = "left">
-            <br>
-            <button id = "sort" onclick="Sort()">SORT!</button>
-            <div id = "extras">
-                <button id = "git" onclick="window.open('https://github.com/jake-d37/kriskringle', '_blank')">Find code on GitHub <img src = "assets/github-mark-white.svg" id = "git-logo"></button>
-                <button id = "excel" onclick="exportToExcel()">Generate spreadsheet</button>
+        <div class = "header-sect header-right">
+            <button class = "sort" onclick="Sort()">SORT!</button>
+            <div class = "extras">
+                <button class = "git" onclick="window.open('https://github.com/jake-d37/kriskringle', '_blank')">Find code on GitHub <img src = "assets/github-mark-white.svg" class = "git-logo"></button>
+                <button class = "excel" onclick="exportToExcel()">Generate spreadsheet</button>
             </div>
         </div>
     </div>

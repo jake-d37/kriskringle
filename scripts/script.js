@@ -184,8 +184,8 @@ function DrawConstraintsForm(player){
     for (let i = 0; i < players.length; i++){
         let option = document.createElement("div");
         //option.style.display = "inline";
-        option.style.marginRight = "14px";
-        option.style.marginBottom = "5px";
+        option.style.marginRight = "1rem";
+        option.style.marginBottom = "0.3125rem";
 
         fname = players[i].name;
         //checkboxes
@@ -255,8 +255,24 @@ function UpdateDrawPlayer() {
             return;
         }
 
-        //update content
-        UpdatePlayerDetails(player,element);
+        // Update content
+        let nameElement = element.querySelector(".player-name");
+        let constraintsElement = element.querySelector(".player-constraints");
+
+        // Update player details
+        nameElement.textContent = player.name;
+        UpdateSortedText(player, element);
+
+        // Update constraints section
+        while (constraintsElement.firstChild) {
+            constraintsElement.removeChild(constraintsElement.lastChild);
+        }
+        constraintsElement.appendChild(DrawConstraintsForm(player));
+
+        // Trigger animation
+        element.classList.remove('fade-in-animation');
+        void element.offsetWidth; // Trigger reflow to reset animation
+        element.classList.add('fade-in-animation');
     });
 
     // Remove the collected elements outside the loop

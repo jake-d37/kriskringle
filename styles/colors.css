@@ -1,0 +1,13 @@
+/* Define color variables */
+:root {
+    /* Primary colors */
+    --primary-color: #E95F5F;
+    --secondary-color: #5EAA51;
+    --third-color: #7196f3;
+
+    /* Text colors */
+    --text-color: #F5F5F5;
+    --second-text-color: #111111;
+    --link-color: #0066cc;
+    --warning-box-color: #ad1414;
+}
